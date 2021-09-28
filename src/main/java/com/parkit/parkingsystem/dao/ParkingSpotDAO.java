@@ -38,7 +38,7 @@ public class ParkingSpotDAO {
     }
 
     public boolean updateParking(ParkingSpot parkingSpot){
-        //update the availability fo that parking slot
+        //update the availability for that parking slot
         Connection con = null;
         try {
             con = dataBaseConfig.getConnection();
@@ -56,4 +56,27 @@ public class ParkingSpotDAO {
         }
     }
 
+    public boolean verifyParkingAvailability(ParkingSpot parkingSpot){
+        //verify the availability for parking slot
+        Connection con = null;
+        boolean result= true;
+        
+        try {
+            con = dataBaseConfig.getConnection();
+           
+            PreparedStatement ps = con.prepareStatement(DBConstants.VERIFY_SPOT_AVAILABILITY);
+            ps.setInt(1, parkingSpot.getId());
+            ps.setString(2, parkingSpot.getParkingType().toString());
+            result = ps.execute();
+            
+            dataBaseConfig.closePreparedStatement(ps);
+            
+        }catch (Exception ex){
+            logger.error("Error spot availability verification",ex);
+           
+        }finally {
+            dataBaseConfig.closeConnection(con);
+        }
+        return result;
+    }
 }
