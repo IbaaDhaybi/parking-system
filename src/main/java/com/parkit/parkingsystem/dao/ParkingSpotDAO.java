@@ -18,10 +18,11 @@ public class ParkingSpotDAO {
 
     public int getNextAvailableSlot(ParkingType parkingType){
         Connection con = null;
+        PreparedStatement ps= null;
         int result=-1;
         try {
             con = dataBaseConfig.getConnection();
-            PreparedStatement ps = con.prepareStatement(DBConstants.GET_NEXT_PARKING_SPOT);
+            ps = con.prepareStatement(DBConstants.GET_NEXT_PARKING_SPOT);
             ps.setString(1, parkingType.toString());
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
@@ -40,9 +41,10 @@ public class ParkingSpotDAO {
     public boolean updateParking(ParkingSpot parkingSpot){
         //update the availability for that parking slot
         Connection con = null;
+        PreparedStatement ps= null;
         try {
             con = dataBaseConfig.getConnection();
-            PreparedStatement ps = con.prepareStatement(DBConstants.UPDATE_PARKING_SPOT);
+            ps = con.prepareStatement(DBConstants.UPDATE_PARKING_SPOT);
             ps.setBoolean(1, parkingSpot.isAvailable());
             ps.setInt(2, parkingSpot.getId());
             int updateRowCount = ps.executeUpdate();
@@ -59,12 +61,13 @@ public class ParkingSpotDAO {
     public boolean verifyParkingAvailability(ParkingSpot parkingSpot){
         //verify the availability for parking slot
         Connection con = null;
+        PreparedStatement ps= null;
         boolean result= true;
         
         try {
             con = dataBaseConfig.getConnection();
            
-            PreparedStatement ps = con.prepareStatement(DBConstants.VERIFY_SPOT_AVAILABILITY);
+            ps = con.prepareStatement(DBConstants.VERIFY_SPOT_AVAILABILITY);
             ps.setInt(1, parkingSpot.getId());
             ps.setString(2, parkingSpot.getParkingType().toString());
             result = ps.execute();

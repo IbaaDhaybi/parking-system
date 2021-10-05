@@ -89,5 +89,11 @@ public class ParkingDataBaseIT {
 		assertTrue(ticket.getParkingSpot().isAvailable());
 
 	}
+	
+	@Test
+	public void testUpdateTicket() {
+		ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
+		
+	}
 
 }

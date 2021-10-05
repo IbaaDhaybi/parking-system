@@ -52,10 +52,21 @@ public class ParkingServiceTest {
         }
     }
 
+//  @Test
+//    public void processIncomingVehicleTest() {
+//    	
+//	  when(inputReaderUtil.readSelection()).thenReturn(1);
+//	  when(parkingSpotDAO.getNextAvailableSlot(ParkingType.CAR)).thenReturn(1);
+//	  
+//    	parkingService.processIncomingVehicle();
+//        verify(ticketDAO, Mockito.times(1)).saveTicket(any(Ticket.class));
+//    }
+    
     @Test
     public void processExitingVehicleTest(){
         parkingService.processExitingVehicle();
         verify(parkingSpotDAO, Mockito.times(1)).updateParking(any(ParkingSpot.class));
     }
+    
 
 }

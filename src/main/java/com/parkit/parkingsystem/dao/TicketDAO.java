@@ -48,10 +48,11 @@ public class TicketDAO {
 
     public Ticket getTicket(String vehicleRegNumber) {
         Connection con = null;
+        PreparedStatement ps= null;
         Ticket ticket = null;
         try {
             con = dataBaseConfig.getConnection();
-            PreparedStatement ps = con.prepareStatement(DBConstants.GET_TICKET);
+            ps = con.prepareStatement(DBConstants.GET_TICKET);
             //ID, PARKING_NUMBER, VEHICLE_REG_NUMBER, PRICE, IN_TIME, OUT_TIME)
             ps.setString(1,vehicleRegNumber);
             ResultSet rs = ps.executeQuery();
@@ -77,27 +78,30 @@ public class TicketDAO {
 
     public boolean updateTicket(Ticket ticket) {
         Connection con = null;
+        PreparedStatement ps= null;
+        boolean result= true;
         try {
             con = dataBaseConfig.getConnection();
-            PreparedStatement ps = con.prepareStatement(DBConstants.UPDATE_TICKET);
+            ps = con.prepareStatement(DBConstants.UPDATE_TICKET);
             ps.setDouble(1, ticket.getPrice());
             ps.setTimestamp(2, new Timestamp(ticket.getOutTime().getTime()));
             ps.setInt(3,ticket.getId());
-            ps.execute();
-            return true;
+            result= ps.execute();
+            
         }catch (Exception ex){
             logger.error("Error saving ticket info",ex);
         }finally {
             dataBaseConfig.closeConnection(con);
         }
-        return false;
+        return result;
     }
     
     public int recurrentClient(String vehicleRegNumber) {
         Connection con = null;
+        PreparedStatement ps= null;
         try {
             con = dataBaseConfig.getConnection();
-            PreparedStatement ps = con.prepareStatement(DBConstants.GET_TICKETS_BY_CLIENT);
+            ps = con.prepareStatement(DBConstants.GET_TICKETS_BY_CLIENT);
             ps.setString(1, vehicleRegNumber);
             ResultSet rs = ps.executeQuery();
             rs.next();

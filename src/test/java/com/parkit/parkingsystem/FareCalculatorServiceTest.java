@@ -215,4 +215,18 @@ public class FareCalculatorServiceTest {
         fareCalculatorService.calculateFare(ticket);
         assertEquals( 0.95 , ticket.getPrice());
     }
+    
+    @Test
+    // test for unknown parking type 
+    public void calculateFareUnknownType() {
+    	Date inTime = new Date();
+    	inTime.setTime( System.currentTimeMillis() - (60 * 60 * 1000));
+    	Date outTime = new Date ();
+    	ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.UNKNOWN, false);
+    	
+    	ticket.setInTime(inTime);
+    	ticket.setOutTime(outTime);
+    	ticket.setParkingSpot(parkingSpot);
+    	assertThrows(IllegalArgumentException.class,() -> fareCalculatorService.calculateFare(ticket));	
+    }
 }
