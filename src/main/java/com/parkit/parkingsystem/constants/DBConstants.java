@@ -10,8 +10,5 @@ public class DBConstants {
     public static final String GET_TICKET = "select t.PARKING_NUMBER, t.ID, t.PRICE, t.IN_TIME, t.OUT_TIME, p.TYPE, p.AVAILABLE from ticket t,parking p where p.parking_number = t.parking_number and t.VEHICLE_REG_NUMBER=? order by t.IN_TIME DESC limit 1";
     public static final String GET_TICKETS_BY_CLIENT = "select count(t.ID) FROM ticket t where t.VEHICLE_REG_NUMBER= ?";
     
-   // public static final String GET_INCOMING_VEHICULE = "select max(t.id), t.PARKING_NUMBER, t.ID, t.PRICE, t.IN_TIME, t.OUT_TIME, p.TYPE from ticket t,parking p where p.parking_number = t.parking_number and t.VEHICLE_REG_NUMBER=? t.IN_TIME is not null and t.OUT_TIME is null";
-   // public static final String GET_EXITING_VEHICULE = "select max(t.id), t.PARKING_NUMBER, t.ID, t.PRICE, t.IN_TIME, t.OUT_TIME, p.TYPE from ticket t,parking p where p.parking_number = t.parking_number and t.VEHICLE_REG_NUMBER=? t.IN_TIME is not null and t.OUT_TIME is not null";
-    
     public static final String VERIFY_SPOT_AVAILABILITY = "select p.AVAILABLE from prod.parking where PARKING_NUMBER= ? and TYPE= ?";
 }

@@ -53,11 +53,6 @@ public class ParkingDataBaseIT {
 		dataBasePrepareService.clearDataBaseEntries();
 	}
 
-	@AfterAll
-	private static void tearDown() {
-
-	}
-
 	@Test
 	public void testParkingACar() {
 		ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
@@ -88,12 +83,6 @@ public class ParkingDataBaseIT {
 		assertNotNull(ticket.getPrice());
 		assertTrue(ticket.getParkingSpot().isAvailable());
 
-	}
-	
-	@Test
-	public void testUpdateTicket() {
-		ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
-		
 	}
 
 }
