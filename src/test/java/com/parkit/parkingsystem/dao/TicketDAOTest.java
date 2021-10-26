@@ -118,7 +118,7 @@ public class TicketDAOTest {
 
 		// sauvegarder le ticket via TicketDAO objet la fonction saveTicket
 		ticketDao.saveTicket(ticket);
-		LocalDateTime in date;
+		LocalDateTime in date ;
 		when(stmt.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(Boolean.TRUE);
 		when(rs.getString(6)).thenReturn("CAR");
