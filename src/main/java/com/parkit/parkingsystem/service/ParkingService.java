@@ -117,6 +117,7 @@ public class ParkingService {
             }
         }catch(Exception e){
             logger.error("Unable to process exiting vehicle",e);
+            System.out.println("error");
         }
     }
 }

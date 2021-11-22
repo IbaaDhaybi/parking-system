@@ -121,8 +121,11 @@ public class TicketDAOTest {
     	ticket.setParkingSpot(new ParkingSpot(1, ParkingType.CAR, false));
     	 Date intime = new Date();
          intime.setTime(System.currentTimeMillis()-(60*60*1000));
+         //Date outtime = new Date();
+         //outtime.setTime(System.currentTimeMillis());
          
     	ticket.setInTime(intime);
+    	//ticket.setOutTime(outtime);
     	when(dataBaseConfig.getConnection()).thenReturn(connection);
         when(connection.prepareStatement(anyString())).thenReturn(stmt);
         
